@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <title>FriendFinder | Survey</title>
+</head>
+
+<body>
+    <!-- Container -->
+    <div class="container text-center">
+
+        <h1>Survey Questions</h1>
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>About You</h2>
+                <form>
+                    <div class="form-group row col-sm-12">
+                        Name (Required):<br>
+                        <input type="text" class="form-control" id="userName">
+                    </div>
+                    <div class="form-group row col-sm-12">
+                        Link to Photo Image (Required):<br>
+                        <input type="text" class="form-control" id="userPhoto"><br>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr>
+
+        <!-- Questions -->
+        <h3>Question 1</h3>
+        Sample Question
+        <div class="form-group row col-sm-4">
+            <select class="form-control" id="q1">
+                <option>1 (Strongly Disagree)</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5 (Strongly Agree)</option>
+            </select>
+        </div>
+        <h3>Question 2</h3>
+        Sample Question
+        <div class="form-group row col-sm-4">
+            <select class="form-control" id="q2">
+                <option>1 (Strongly Disagree)</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5 (Strongly Agree)</option>
+            </select>
+        </div>
+        <h3>Question 3</h3>
+        Sample Question
+        <div class="form-group row col-sm-4">
+            <select class="form-control" id="q3">
+                <option>1 (Strongly Disagree)</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5 (Strongly Agree)</option>
+            </select>
+        </div>
+        <h3>Question 4</h3>
+        Sample Question
+        <div class="form-group row col-sm-4">
+            <select class="form-control" id="q4">
+                <option>1 (Strongly Disagree)</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5 (Strongly Agree)</option>
+            </select>
+        </div>
+        <h3>Question 5</h3>
+        Sample Question
+        <div class="form-group row col-sm-4">
+            <select class="form-control" id="q5">
+                <option>1 (Strongly Disagree)</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5 (Strongly Agree)</option>
+            </select>
+        </div>
+        <h3>Question 6</h3>
+        Sample Question
+        <div class="form-group row col-sm-4">
+            <select class="form-control" id="q6">
+                <option>1 (Strongly Disagree)</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5 (Strongly Agree)</option>
+            </select>
+        </div>
+        <h3>Question 7</h3>
+        Sample Question
+        <div class="form-group row col-sm-4">
+            <select class="form-control" id="q7">
+                <option>1 (Strongly Disagree)</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5 (Strongly Agree)</option>
+            </select>
+        </div>
+        <h3>Question 8</h3>
+        Sample Question
+        <div class="form-group row col-sm-4">
+            <select class="form-control" id="q8">
+                <option>1 (Strongly Disagree)</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5 (Strongly Agree)</option>
+            </select>
+        </div>
+        <h3>Question 9</h3>
+        Sample Question
+        <div class="form-group row col-sm-4">
+            <select class="form-control" id="q9">
+                <option>1 (Strongly Disagree)</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5 (Strongly Agree)</option>
+            </select>
+        </div>
+        <h3>Question 10</h3>
+        Sample Question
+        <div class="form-group row col-sm-4">
+            <select class="form-control" id="q10">
+                <option>1 (Strongly Disagree)</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5 (Strongly Agree)</option>
+            </select>
+        </div>
+
+
+    <!-- Submit Button -->
+    <button type="button" class="btn btn-primary submitButton">Submit</button>
+
+
+    </div>
+
+    <script type="text/javascript">
+        $(".submitButton").on("click", function(event) {
+            event.preventDefault();
+
+            let newUser = {
+                name: $("#userName").val(),
+                photo: $("#userPhoto").val(),
+                scores: []
+            }
+
+            for (let i = 1; i < 11; i++) {
+                newUser.scores.push($(`#q${i}`).val());
+            }
+
+            $.post("/api/friends", newUser, function(data) {
+
+                $("#userName").val("");
+                $("#userPhoto").val("");
+            });
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
