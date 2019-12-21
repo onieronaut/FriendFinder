@@ -39,8 +39,8 @@
 
         <!-- Questions -->
         <h3>Question 1</h3>
-        Sample Question
-        <div class="form-group row col-sm-4">
+        You find people who are web developers extremely cool.
+        <div class="form-group row mx-auto col-sm-4">
             <select class="form-control" id="q1">
                 <option>1</option>
                 <option>2</option>
@@ -50,8 +50,8 @@
             </select>
         </div>
         <h3>Question 2</h3>
-        Sample Question
-        <div class="form-group row col-sm-4">
+        There isn't such a thing as a fart that isn't funny.
+        <div class="form-group row mx-auto col-sm-4">
             <select class="form-control" id="q2">
                 <option>1</option>
                 <option>2</option>
@@ -61,8 +61,8 @@
             </select>
         </div>
         <h3>Question 3</h3>
-        Sample Question
-        <div class="form-group row col-sm-4">
+        You'd rather be at home coding than out with friends having fun.
+        <div class="form-group row mx-auto col-sm-4">
             <select class="form-control" id="q3">
                 <option>1</option>
                 <option>2</option>
@@ -72,8 +72,8 @@
             </select>
         </div>
         <h3>Question 4</h3>
-        Sample Question
-        <div class="form-group row col-sm-4">
+        Your idea of sexy is cleaning up your code with some syntatic sugar.
+        <div class="form-group row mx-auto col-sm-4">
             <select class="form-control" id="q4">
                 <option>1</option>
                 <option>2</option>
@@ -83,8 +83,8 @@
             </select>
         </div>
         <h3>Question 5</h3>
-        Sample Question
-        <div class="form-group row col-sm-4">
+        It is almost impossible for someone to offend you.
+        <div class="form-group row mx-auto col-sm-4">
             <select class="form-control" id="q5">
                 <option>1</option>
                 <option>2</option>
@@ -94,8 +94,8 @@
             </select>
         </div>
         <h3>Question 6</h3>
-        Sample Question
-        <div class="form-group row col-sm-4">
+        Knowing the path, and walking it are two different things.
+        <div class="form-group row mx-auto col-sm-4">
             <select class="form-control" id="q6">
                 <option>1</option>
                 <option>2</option>
@@ -105,8 +105,8 @@
             </select>
         </div>
         <h3>Question 7</h3>
-        Sample Question
-        <div class="form-group row col-sm-4">
+        You often daydream about having superpowers and becoming a masked vigilante.
+        <div class="form-group row mx-auto col-sm-4">
             <select class="form-control" id="q7">
                 <option>1</option>
                 <option>2</option>
@@ -116,8 +116,8 @@
             </select>
         </div>
         <h3>Question 8</h3>
-        Sample Question
-        <div class="form-group row col-sm-4">
+        You're the type of person to tell someone when they have food stuck in their teeth.
+        <div class="form-group row mx-auto col-sm-4">
             <select class="form-control" id="q8">
                 <option>1</option>
                 <option>2</option>
@@ -127,8 +127,9 @@
             </select>
         </div>
         <h3>Question 9</h3>
-        Sample Question
-        <div class="form-group row col-sm-4">
+        You often explore new experiences, even when you know it might be a bad decision, but an experiences
+        nonetheless.
+        <div class="form-group row mx-auto col-sm-4">
             <select class="form-control" id="q9">
                 <option>1</option>
                 <option>2</option>
@@ -138,8 +139,8 @@
             </select>
         </div>
         <h3>Question 10</h3>
-        Sample Question
-        <div class="form-group row col-sm-4">
+        Honesty should be more valued than people's feelings.
+        <div class="form-group row mx-auto col-sm-4">
             <select class="form-control" id="q10">
                 <option>1</option>
                 <option>2</option>
@@ -150,10 +151,10 @@
         </div>
 
 
-    <!-- Submit Button -->
-    <button type="button" class="btn btn-primary submitButton">Submit</button>
-
-    <!-- Modal -->
+        <!-- Submit Button -->
+        <button type="button" class="btn btn-primary submitButton">Submit</button>
+        <hr>
+        <!-- Modal -->
         <div id="results" class="modal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -162,48 +163,54 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <p>You matched with <p id="matchName"></p></p>
-                        <img id="matchPhoto" src="#" width="250" height="250"/>
+                        <p>You matched with <p id="matchName"></p>
+                        </p>
+                        <img id="matchPhoto" src="#" width="250" height="250" />
                     </div>
                 </div>
             </div>
         </div>
 
-    <!-- Footer -->
-        <footer class="footer">
-            <div class="container">
-                <a href="api/friends">API Friends List</a> |
-                <a href="api/clear">GitHub</a>
-                    
-            </div>
-        </footer>
-        
+        <!-- Footer -->
+
     </div>
+    <footer class="footer">
+        <div class="container">
+            <a href="api/friends">API Friends List</a> |
+            <a href="https://github.com/onieronaut/FriendFinder">GitHub</a>
+
+        </div>
+    </footer>
 
     <script type="text/javascript">
-        $(".submitButton").on("click", function(event) {
+        $(".submitButton").on("click", function (event) {
             event.preventDefault();
 
-            let newUser = {
-                name: $("#userName").val(),
-                photo: $("#userPhoto").val(),
-                scores: []
+            if ($("#userName").val() !== "" && $("#userPhoto").val() !== "") {
+
+                let newUser = {
+                    name: $("#userName").val(),
+                    photo: $("#userPhoto").val(),
+                    scores: []
+                }
+
+                for (let i = 1; i < 11; i++) {
+                    newUser.scores.push($(`#q${i}`).val());
+                }
+
+                $.post("/api/friends", newUser, function (data) {
+
+                    $("#userName").val("");
+                    $("#userPhoto").val("");
+
+                    $("#matchName").text(data.name);
+                    $("#matchPhoto").attr("src", data.photo);
+
+                    $("#results").modal("toggle");
+                });
+            } else {
+                alert("Please fill out all fields!")
             }
-
-            for (let i = 1; i < 11; i++) {
-                newUser.scores.push($(`#q${i}`).val());
-            }
-
-            $.post("/api/friends", newUser, function(data) {
-
-                $("#userName").val("");
-                $("#userPhoto").val("");
-
-                $("#matchName").text(data.name);
-                $("#matchPhoto").attr("src", data.photo);
-
-                $("#results").modal("toggle");
-\            });
         });
     </script>
 
